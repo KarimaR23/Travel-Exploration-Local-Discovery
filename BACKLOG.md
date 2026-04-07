@@ -25,8 +25,8 @@ Travel-Exploration-Local-Discovery
 
 | ID | User Story                                         | Priority (H/M/L) | Assigned To | Status (Not Started / In Progress / Done) |
 |----|----------------------------------------------------|------------------|-------------|-------------------------------------------|
-| 1  | As a user, I want to __________ so that __________ | High             |             | Not Started                               |
-| 2  | As a user, I want to __________ so that __________ | High             |             | Not Started                               |
+| 1  | As a user, I want to create an account__________ so that _I can save and post gems._________ | High             |             | Not Started                               |
+| 2  | As a user, I want to _log in_________ so that __I can acccess my account________ | High             |             | Not Started                               |
 | 3  | As a user, I want to __________ so that __________ | Medium           |             | Not Started                               |
 | 4  | As a user, I want to __________ so that __________ | Medium           |             | Not Started                               |
 | 5  | As a user, I want to __________ so that __________ | Medium           |             | Not Started                               |
