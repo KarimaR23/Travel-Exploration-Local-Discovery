@@ -6,7 +6,6 @@ import travel.exploration.local.model.Gem;
 import travel.exploration.local.repository.GemRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GemService {
@@ -18,21 +17,20 @@ public class GemService {
         this.gemRepository = gemRepository;
     }
 
-    // CREATE: Logic for "Gem Submission" [cite: 17, 30, 37]
+
     public Gem saveGem(Gem gem) {
-        // Business logic: Ensure the gem has a title before saving
+
         if (gem.getTitle() == null || gem.getTitle().isEmpty()) {
             throw new IllegalArgumentException("Gem title cannot be empty");
         }
         return gemRepository.save(gem);
     }
 
-    // READ: Get all gems for the Discovery Feed [cite: 18, 31, 36]
+
     public List<Gem> findAllGems() {
         return gemRepository.findAll();
     }
 
-    // READ: Filter by category (e.g., Nature, Art, Food) [cite: 18, 31, 71]
     public List<Gem> findGemsByCategory(String categoryName) {
         return gemRepository.findByCategoryName(categoryName);
     }
@@ -54,7 +52,7 @@ public class GemService {
         return gemRepository.save(existingGem);
     }
 
-    // DELETE: Remove a gem from the system
+
     public void deleteGemById(Long id) {
         if (!gemRepository.existsById(id)) {
             throw new RuntimeException("Cannot delete: Gem not found");
