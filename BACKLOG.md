@@ -4,9 +4,9 @@
 Travel-Exploration-Local-Discovery
 
 ## Team Members
-- Member 1:
-- Member 2:
-- Member 3:
+- Member 1:Karima Dewdney
+- Member 2:Keshawn Ross
+- Member 3:Jarrett Gilbert
 
 ---
 
@@ -25,16 +25,16 @@ Travel-Exploration-Local-Discovery
 
 | ID | User Story                                         | Priority (H/M/L) | Assigned To | Status (Not Started / In Progress / Done) |
 |----|----------------------------------------------------|------------------|-------------|-------------------------------------------|
-| 1  | As a user, I want to create an account__________ so that _I can save and post gems._________ | High             |             | Not Started                               |
-| 2  | As a user, I want to _log in_________ so that __I can acccess my account________ | High             |             | Not Started                               |
-| 3  | As a user, I want to __________ so that __________ | Medium           |             | Not Started                               |
-| 4  | As a user, I want to __________ so that __________ | Medium           |             | Not Started                               |
-| 5  | As a user, I want to __________ so that __________ | Medium           |             | Not Started                               |
-| 6  | As a user, I want to __________ so that __________ | Low              |             | Not Started                               |
-| 7  | As a user, I want to __________ so that __________ | Low              |             | Not Started                               |
-| 8  | As a user, I want to __________ so that __________ | Medium           |             | Not Started                               |
-| 9  | As a user, I want to __________ so that __________ | Low              |             | Not Started                               |
-| 10 | As a user, I want to __________ so that __________ | Low              |             | Not Started                               |
+| 1  | As a user, I want to create an account so that I can save and post gems. | High             |             | Not Started                               |
+| 2  | As a user, I want to log in so that I can acccess my account.| High             |             | Not Started                               |
+| 3  | As a user, I want to add a new gem so that I can share a hidden location. | Medium           |             | Not Started                               |
+| 4  | As a user, I want to view all gems so that I can discover new places.| Medium           |             | Not Started                               |
+| 5  | As a user, I want to filter gems so that I can find what im interested in. | Medium           |             | Not Started                               |
+| 6  | As a user, I want to upvote a gem so that I can show it is a good spot. | Low              |             | Not Started                               |
+| 7  | As a user, I want to view details of a gem so that I can learn more about it.| Low              |             | Not Started                               |
+| 8  | As a user, I want to edit or delete my gem so that I can update my posts. | Medium           |             | Not Started                               |
+| 9  | As a user, I want to see gems on a map so that I can find locations near me.| Low              |             | Not Started                               |
+| 10 | As a user, I want to save favortite gems so that I can come back to them later. | Low              |             | Not Started                               |
 
 ---
 
