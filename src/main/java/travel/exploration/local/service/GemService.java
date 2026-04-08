@@ -35,7 +35,7 @@ public class GemService {
         return gemRepository.findByCategoryName(categoryName);
     }
 
-    // READ: Find a specific gem by ID [cite: 72]
+    // READ: Find a specific gem by ID
     public Gem getGemById(Long id) {
         return gemRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Gem not found with id: " + id));

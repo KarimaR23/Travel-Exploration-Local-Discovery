@@ -2,6 +2,7 @@ package travel.exploration.local.model;
 
 import jakarta.persistence.*;
 
+@SuppressWarnings("JpaAttributeTypeInspection")
 @Entity
 @Table(name = "gems")
 public class Gem {
