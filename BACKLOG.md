@@ -28,11 +28,11 @@ Travel-Exploration-Local-Discovery
 | 1  | As a user, I want to create an account so that I can save and post gems.        | High             |             | Not Started                               |
 | 2  | As a user, I want to log in so that I can acccess my account.                   | High             |Keshawn Ross            | Not Started                               |
 | 3  | As a user, I want to add a new gem so that I can share a hidden location.       | Medium           |             | Not Started                               |
-| 4  | As a user, I want to view all gems so that I can discover new places.           | Medium           |             | Not Started                               |
+| 4  | As a user, I want to view all gems so that I can discover new places.           | Medium           |Jarrett Gilbert             | Not Started                               |
 | 5  | As a user, I want to filter gems so that I can find what im interested in.      | Medium           |             | Not Started                               |
-| 6  | As a user, I want to upvote a gem so that I can show it is a good spot.         | Low              |             | Not Started                               |
+| 6  | As a user, I want to upvote a gem so that I can show it is a good spot.         | Low              |Jarret Gilbert             | Not Started                               |
 | 7  | As a user, I want to view details of a gem so that I can learn more about it.   | Low              |Keshawn Ross            | Not Started                               |
-| 8  | As a user, I want to edit or delete my gem so that I can update my posts.       | Medium           |             | Not Started                               |
+| 8  | As a user, I want to edit or delete my gem so that I can update my posts.       | Medium           |Jarrett Gilbert             | Not Started                               |
 | 9  | As a user, I want to see gems on a map so that I can find locations near me.    | Low              |             | Not Started                               |
 | 10 | As a user, I want to save favortite gems so that I can come back to them later. | Low              |Keshawn Ross            | Not Started                               |
 
