@@ -42,7 +42,7 @@ public class CategoryService {
         }
         return null;
     }
-
+//
     public void deleteCategory(Long id) {
         categories.removeIf(category -> category.getId().equals(id));
     }
