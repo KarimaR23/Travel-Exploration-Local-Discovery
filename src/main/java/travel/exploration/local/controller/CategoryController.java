@@ -7,7 +7,7 @@ import travel.exploration.local.service.CategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
