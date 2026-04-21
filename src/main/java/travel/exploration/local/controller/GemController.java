@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/gems")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GemController {
 
     private final GemService gemService;
