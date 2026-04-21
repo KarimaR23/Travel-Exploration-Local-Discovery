@@ -2,48 +2,43 @@ package travel.exploration.local.service;
 
 import org.springframework.stereotype.Service;
 import travel.exploration.local.model.Category;
+import travel.exploration.local.repository.CategoryRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CategoryService {
 
-    private final List<Category> categories = new ArrayList<>();
-    private Long nextId = 1L;
+    private final CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     public Category createCategory(Category category) {
-        category.setId(nextId++);
-        categories.add(category);
-        return category;
+        return categoryRepository.save(category);
     }
 
     public List<Category> getAllCategories() {
-        return categories;
+        return categoryRepository.findAll();
     }
 
     public Category getCategoryById(Long id) {
-        for (Category category : categories) {
-            if (category.getId().equals(id)) {
-                return category;
-            }
-        }
-        return null;
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
     }
 
     public Category updateCategory(Long id, Category updatedCategory) {
-        for (Category category : categories) {
-            if (category.getId().equals(id)) {
-                category.setName(updatedCategory.getName());
-                category.setDescription(updatedCategory.getDescription());
-                category.setGems(updatedCategory.getGems());
-                return category;
-            }
-        }
-        return null;
+        Category existing = getCategoryById(id);
+        existing.setName(updatedCategory.getName());
+        existing.setDescription(updatedCategory.getDescription());
+        return categoryRepository.save(existing);
     }
-//
+
     public void deleteCategory(Long id) {
-        categories.removeIf(category -> category.getId().equals(id));
+        if (!categoryRepository.existsById(id)) {
+            throw new RuntimeException("Category not found with id: " + id);
+        }
+        categoryRepository.deleteById(id);
     }
 }

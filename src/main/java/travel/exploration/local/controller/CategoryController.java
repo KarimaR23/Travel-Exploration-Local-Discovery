@@ -1,5 +1,6 @@
 package travel.exploration.local.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import travel.exploration.local.model.Category;
 import travel.exploration.local.service.CategoryService;
@@ -17,7 +18,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category createCategory(@RequestBody Category category) {
+    public Category createCategory(@Valid @RequestBody Category category) {
         return categoryService.createCategory(category);
     }
 

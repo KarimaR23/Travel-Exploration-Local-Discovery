@@ -1,13 +1,12 @@
 package travel.exploration.local.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import travel.exploration.local.model.Category;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface CategoryRepository {
-    Category save(Category category);
-    List<Category> findAll();
-    Optional<Category> findById(Long id);
-    void deleteById(Long id);
+@Repository
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+    Optional<Category> findByName(String name);
 }

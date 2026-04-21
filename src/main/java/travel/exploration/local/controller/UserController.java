@@ -1,11 +1,11 @@
 package travel.exploration.local.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import travel.exploration.local.model.User;
 import travel.exploration.local.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -19,7 +19,7 @@ public class UserController {
 
     // Create
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 
@@ -31,7 +31,7 @@ public class UserController {
 
     // Read one
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 

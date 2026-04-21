@@ -5,7 +5,6 @@ import travel.exploration.local.model.User;
 import travel.exploration.local.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,23 +15,23 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // Create
     public User createUser(User user) {
         return userRepository.save(user);
     }
 
-    // Read all
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // Read one
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    // Delete
     public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("User not found with id: " + id);
+        }
         userRepository.deleteById(id);
     }
 }
