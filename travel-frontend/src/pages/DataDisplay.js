@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
+const script = document.createElement('script');
+script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}`;
+
 const DataDisplay = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +13,7 @@ const DataDisplay = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/data'); // Assuming backend endpoint
+        const response = await axios.get('/api/gems'); // Assuming backend endpoint
         setData(response.data);
       } catch (err) {
         // Fallback to mock data if backend is not available
@@ -25,7 +29,7 @@ const DataDisplay = () => {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, []);
 
   if (loading) return <div className="page">Loading...</div>;
