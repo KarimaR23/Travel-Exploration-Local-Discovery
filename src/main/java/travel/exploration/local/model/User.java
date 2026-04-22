@@ -27,9 +27,12 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "Password is required")
+    @JsonIgnore
     @Column(nullable = false)
     private String passwordHash;
+
+    @Column(nullable = false)
+    private String role = "ROLE_USER";
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -38,11 +41,12 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String email, String passwordHash) {
+    public User(Long id, String username, String email, String passwordHash, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
+        this.role = role;
     }
 
     public Long getId() {
@@ -75,6 +79,14 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getRole(){
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public List<Gem> getGems() {
