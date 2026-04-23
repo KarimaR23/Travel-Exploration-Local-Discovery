@@ -1,6 +1,7 @@
 package travel.exploration.local.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.exploration.local.model.Category;
 import travel.exploration.local.service.CategoryService;
@@ -18,6 +19,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
     public Category createCategory(@Valid @RequestBody Category category) {
         return categoryService.createCategory(category);
@@ -33,11 +35,13 @@ public class CategoryController {
         return categoryService.getCategoryById(id);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PutMapping("/{id}")
     public Category updateCategory(@PathVariable Long id, @RequestBody Category category) {
         return categoryService.updateCategory(id, category);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
