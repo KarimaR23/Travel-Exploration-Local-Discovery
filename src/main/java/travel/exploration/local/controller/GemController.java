@@ -1,6 +1,7 @@
 package travel.exploration.local.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.exploration.local.model.Gem;
 import travel.exploration.local.service.GemService;
@@ -33,16 +34,19 @@ public class GemController {
         return gemService.getGemById(id);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
     public Gem addGem(@Valid @RequestBody Gem gem) {
         return gemService.saveGem(gem);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PutMapping("/{id}")
     public Gem updateGem(@PathVariable Long id, @RequestBody Gem gem) {
         return gemService.updateGem(id, gem);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}")
     public void deleteGem(@PathVariable Long id) {
         gemService.deleteGemById(id);
