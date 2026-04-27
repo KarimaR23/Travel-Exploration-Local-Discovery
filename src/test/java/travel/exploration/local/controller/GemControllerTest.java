@@ -8,6 +8,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import travel.exploration.local.model.Gem;
+import travel.exploration.local.security.JWTService;
+import travel.exploration.local.security.CustomUserDetailsService;
 import travel.exploration.local.service.GemService;
 
 import java.util.List;
@@ -23,13 +25,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(GemController.class)
- class GemControllerTest {
+public class GemControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockitoBean
     private GemService gemService;
+
+    @MockitoBean
+    private JWTService jwtService;
+
+    @MockitoBean
+    private CustomUserDetailsService customUserDetailsService;
 
     @Test
     void testReadAllGems() throws Exception {
