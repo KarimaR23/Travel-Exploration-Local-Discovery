@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home.js';
-import DataDisplay from './pages/DataDisplay.js';
-import FormPage from './pages/FormPage.js';
+import Home from './pages/Home.jsx';
+import DataDisplay from './pages/DataDisplay.jsx';
+import FormPage from './pages/FormPage.jsx';
 import './App.css';
 
 function App() {
