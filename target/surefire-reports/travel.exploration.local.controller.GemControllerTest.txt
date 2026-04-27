@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: travel.exploration.local.controller.GemControllerTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.498 s -- in travel.exploration.local.controller.GemControllerTest
