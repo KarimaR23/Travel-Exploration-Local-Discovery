@@ -3,7 +3,7 @@ import App from './App.jsx';
 
 test('renders app title', () => {
   render(<App />);
-  expect(screen.getByText(/Gems Frontend/i)).toBeInTheDocument();
+  expect(screen.getByText(/Hidden Gems/i)).toBeInTheDocument();
 });
 
 test('renders navigation links', () => {

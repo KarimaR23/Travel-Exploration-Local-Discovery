@@ -28,7 +28,7 @@ const FormPage = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get('/api/categories');
+      const res = await axios.get('http://10.0.0.216:5173/api/categories');
       setCategories(res.data);
     } catch (err) {
       console.error('Failed to load categories', err);
@@ -37,7 +37,7 @@ const FormPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('/api/users');
+      const res = await axios.get('http://10.0.0.216:5173/api/users');
       setUsers(res.data);
     } catch (err) {
       console.error('Failed to load users', err);
@@ -71,7 +71,7 @@ const FormPage = () => {
     };
 
     try {
-      await axios.post('/api/gems', payload);
+      await axios.post('http://10.0.0.216:5173/api/gems', payload);
       setResponse('Gem saved successfully!');
       setFormData({
         title: '',

@@ -11,7 +11,7 @@ function App() {
       <div className="App">
         <nav className="navbar">
           <div className="nav-container">
-            <h1 className="nav-title">Gems Frontend</h1>
+            <h1 className="nav-title">Hidden Gems</h1>
             <ul className="nav-links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/data">Data Display</Link></li>

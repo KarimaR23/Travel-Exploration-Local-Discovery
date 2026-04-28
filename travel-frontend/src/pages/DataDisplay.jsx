@@ -13,15 +13,15 @@ const DataDisplay = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/gems'); // Assuming backend endpoint
+        const response = await axios.get('http://10.0.0.216:5173/api/gems'); // Assuming backend endpoint
         setData(response.data);
       } catch (err) {
         // Fallback to mock data if backend is not available
         setData([
-          { id: 1, title: 'Ruby Gem', description: 'A precious red gemstone.' },
-          { id: 2, title: 'Emerald Gem', description: 'A vibrant green gemstone.' },
-          { id: 3, title: 'Sapphire Gem', description: 'A deep blue gemstone.' },
-          { id: 4, title: 'Diamond Gem', description: 'The hardest natural substance.' }
+          { id: 1, title: 'Restaurants', description: 'Food and dining spot.' },
+          { id: 2, title: 'Parks', description: 'Outdoor and recreation.' },
+          { id: 3, title: 'Museums', description: 'Historical and cultural.' },
+          { id: 4, title: 'Nature', description: 'Waterfalls and trails.' }
         ]);
         setError(null); // Clear error since we have fallback data
       } finally {
