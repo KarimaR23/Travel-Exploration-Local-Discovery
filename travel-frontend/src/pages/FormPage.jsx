@@ -32,6 +32,13 @@ const FormPage = () => {
       setCategories(res.data);
     } catch (err) {
       console.error('Failed to load categories', err);
+
+      setCategories([
+        { id: 2, name: 'Park' },
+        { id: 3, name: 'Museum' },
+        { id: 1, name: 'Restaurant' },
+        { id: 4, name: 'Nature' }
+      ]);
     }
   };
 
@@ -41,6 +48,11 @@ const FormPage = () => {
       setUsers(res.data);
     } catch (err) {
       console.error('Failed to load users', err);
+
+      setUsers([
+        { id: 1, username: 'Klythie' },
+        { id: 2, username: 'Mellow' }
+      ]);
     }
   };
 
