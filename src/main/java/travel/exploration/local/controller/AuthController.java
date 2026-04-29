@@ -2,8 +2,6 @@ package travel.exploration.local.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import travel.exploration.local.dto.AuthResponse;
@@ -24,16 +22,14 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
-    private final AuthenticationManager authenticationManager;
+
 
     public AuthController(UserRepository userRepository,
                           PasswordEncoder passwordEncoder,
-                          JWTService jwtService,
-                          AuthenticationManager authenticationManager) {
+                          JWTService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
-        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/register")
@@ -60,18 +56,24 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsernameOrEmail(),
-                        request.getPassword()
-                )
-        );
-
         User user = userRepository.findByUsername(request.getUsernameOrEmail())
                 .or(() -> userRepository.findByEmail(request.getUsernameOrEmail()))
-                .orElseThrow();
+                .orElse(null);
+
+        if (user == null) {
+            return ResponseEntity.status(401).body("User not found");
+        }
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+            return ResponseEntity.status(401).body("Invalid username/email or password");
+        }
 
         String token = jwtService.generateToken(user);
-        return ResponseEntity.ok(new AuthResponse(token, user.getUsername(), user.getRole()));
+
+        return ResponseEntity.ok(new AuthResponse(
+                token,
+                user.getUsername(),
+                user.getRole()
+        ));
     }
 }
