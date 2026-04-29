@@ -15,7 +15,10 @@ import travel.exploration.local.security.JWTService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "http://10.0.0.216:5173"
+})
 public class AuthController {
 
     private final UserRepository userRepository;
