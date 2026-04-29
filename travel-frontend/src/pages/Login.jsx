@@ -25,23 +25,26 @@ function Login() {
         setError("");
 
         try {
-            const response = await axios.post(
-                `${API_BASE_URL}/api/auth/login`,
-                {
-                    usernameOrEmail: formData.usernameOrEmail,
-                    password: formData.password
-                }
-            );
+            const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+                usernameOrEmail: formData.usernameOrEmail,
+                password: formData.password
+            });
 
-            // store token if your backend returns one
-            if (response.data?.token) {
-                localStorage.setItem("token", response.data.token);
-            }
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("username", response.data.username);
+            localStorage.setItem("role", response.data.role);
 
-            setMessage("Login successful!");
+            setMessage(`Login successful! Welcome, ${response.data.username}.`);
         } catch (err) {
-            console.error(err);
-            setError("Login failed. Check your username/email and password.");
+            console.error("LOGIN ERROR:", err.response?.status, err.response?.data || err.message);
+
+            if (!err.response) {
+                setError("Backend is not connected. Make sure Spring Boot is running.");
+            } else if (err.response.status === 401) {
+                setError("Invalid username/email or password.");
+            } else {
+                setError(`Login failed: ${err.response.data || err.message}`);
+            }
         }
     };
 
