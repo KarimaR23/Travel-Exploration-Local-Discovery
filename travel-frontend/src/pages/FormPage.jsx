@@ -71,6 +71,12 @@ const FormPage = () => {
     try {
       const token = localStorage.getItem("token");
 
+      if (!token) {
+        setError("Please log in before submitting a gem.");
+        setSubmitting(false);
+        return;
+      }
+
       await axios.post('http://10.0.0.216:8080/api/gems', payload, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -89,8 +95,13 @@ const FormPage = () => {
       });
 
     } catch (err) {
-      console.error(err.response?.data || err.message);
-      setError('Failed to submit gem data.');
+      console.error("FORM ERROR:", err.response?.status, err.response?.data || err.message);
+
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        setError("You must log in again before submitting.");
+      } else {
+        setError(`Failed to submit gem data: ${err.response?.data || err.message}`);
+      }
     } finally {
       setSubmitting(false);
     }
