@@ -45,10 +45,19 @@ const DataDisplay = () => {
                     {
                         id: 4,
                         title: 'Nature Trail',
-                        description: 'Waterfalls and trails.',
-                        latitude: 30.49,
-                        longitude: -84.27,
+                        description: 'Trails and Wildlife.',
+                        latitude: 30.3714958,
+                        longitude: -84.2684613,
                         category: { name: 'Nature' }
+                    },
+
+                    {
+                        id: 5,
+                        title: 'Beaches',
+                        description: 'Coastal places, lakes, and waterfront destinations.',
+                        latitude: 30.05715,
+                        longitude: -84.2896179,
+                        category: { name: 'Beaches' }
                     }
                 ]);
 
