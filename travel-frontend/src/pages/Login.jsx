@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "http://10.0.0.216:8080";
+const API_BASE_URL = "http://localhost:8080";
 
 function Login() {
     const [formData, setFormData] = useState({

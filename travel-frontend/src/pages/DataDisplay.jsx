@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyCBmcbdO0twh2OSxKSden1OeXXwhvzHL2E';
-const API_BASE_URL = 'http://10.0.0.216:8080';
+const API_BASE_URL = 'http://localhost:8080';
 
 const DataDisplay = () => {
     const [data, setData] = useState([]);

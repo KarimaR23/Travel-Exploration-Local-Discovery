@@ -26,7 +26,7 @@ const FormPage = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get('http://10.0.0.216:8080/api/categories');
+      const res = await axios.get('http://localhost:8080/api/categories');
       setCategories(res.data);
     } catch (err) {
       console.error('Failed to load categories', err);
@@ -86,7 +86,7 @@ const FormPage = () => {
         return;
       }
 
-      await axios.post('http://10.0.0.216:8080/api/gems', payload, {
+      await axios.post('http://localhost:8080/api/gems', payload, {
         headers: {
           Authorization: `Bearer ${token}`
         }
