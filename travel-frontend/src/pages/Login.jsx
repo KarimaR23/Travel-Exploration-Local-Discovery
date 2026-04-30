@@ -33,8 +33,11 @@ function Login() {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("username", response.data.username);
             localStorage.setItem("role", response.data.role);
+            localStorage.setItem("creatorId", response.data.id);
 
-            setMessage(`Login successful! Welcome, ${response.data.username}.`);
+            setMessage(
+                `Login successful! Welcome, ${response.data.username}. Your Creator ID is ${response.data.id}.`
+            );
         } catch (err) {
             console.error("LOGIN ERROR:", err.response?.status, err.response?.data || err.message);
 

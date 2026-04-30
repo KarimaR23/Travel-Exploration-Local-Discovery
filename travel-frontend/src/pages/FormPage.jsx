@@ -35,7 +35,8 @@ const FormPage = () => {
         { id: 2, name: 'Park' },
         { id: 3, name: 'Museum' },
         { id: 1, name: 'Restaurant' },
-        { id: 4, name: 'Nature' }
+        { id: 4, name: 'Nature' },
+        {id: 5, name: 'Beaches'}
       ]);
     }
   };
@@ -55,6 +56,14 @@ const FormPage = () => {
     setResponse(null);
     setError(null);
 
+    const creatorId = localStorage.getItem("creatorId");
+
+    if (!creatorId) {
+      setError("Please log in before submitting a gem.");
+      setSubmitting(false);
+      return;
+    }
+
     const payload = {
       title: formData.title,
       description: formData.description,
@@ -64,7 +73,7 @@ const FormPage = () => {
         id: Number(formData.categoryId)
       },
       creator: {
-        id: 1
+        id: Number(creatorId)
       }
     };
 

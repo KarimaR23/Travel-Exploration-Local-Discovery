@@ -26,9 +26,14 @@ function Register() {
         setError("");
 
         try {
-            await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
+            const response = await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
 
-            setMessage("Account created successfully!");
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("username", response.data.username);
+            localStorage.setItem("role", response.data.role);
+            localStorage.setItem("creatorId", response.data.id);
+
+            setMessage(`Account created successfully! Your Creator ID is ${response.data.id}.`);
         } catch (err) {
             console.error(err);
 
