@@ -9,6 +9,15 @@ const DataDisplay = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [editingGem, setEditingGem] = useState(null);
+    const [editFormData, setEditFormData] = useState({
+        title: '',
+        description: '',
+        latitude: '',
+        longitude: ''
+    });
+    const [message, setMessage] = useState('');
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -50,7 +59,6 @@ const DataDisplay = () => {
                         longitude: -84.2684613,
                         category: { name: 'Nature' }
                     },
-
                     {
                         id: 5,
                         title: 'Beaches',
@@ -108,6 +116,97 @@ const DataDisplay = () => {
         }
     }, [loading, data]);
 
+    const handleEditClick = (gem) => {
+        setEditingGem(gem);
+
+        setEditFormData({
+            title: gem.title || '',
+            description: gem.description || '',
+            latitude: gem.latitude || '',
+            longitude: gem.longitude || ''
+        });
+    };
+
+    const handleEditChange = (e) => {
+        setEditFormData({
+            ...editFormData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleUpdateGem = async (e) => {
+        e.preventDefault();
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            setMessage("Please log in before updating a gem.");
+            return;
+        }
+
+        const payload = {
+            title: editFormData.title,
+            description: editFormData.description,
+            latitude: Number(editFormData.latitude),
+            longitude: Number(editFormData.longitude),
+            category: editingGem.category,
+            creator: editingGem.creator
+        };
+
+        try {
+            const response = await axios.put(
+                `${API_BASE_URL}/api/gems/${editingGem.id}`,
+                payload,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            setData(
+                data.map((gem) =>
+                    gem.id === editingGem.id ? response.data : gem
+                )
+            );
+
+            setEditingGem(null);
+            setMessage("Gem updated successfully!");
+        } catch (err) {
+            console.error("UPDATE ERROR:", err.response?.data || err.message);
+            setMessage("Failed to update gem.");
+        }
+    };
+
+    const handleDeleteGem = async (id) => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            setMessage("Please log in before deleting a gem.");
+            return;
+        }
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this gem?");
+
+        if (!confirmDelete) {
+            return;
+        }
+
+        try {
+            await axios.delete(`${API_BASE_URL}/api/gems/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            setData(data.filter((gem) => gem.id !== id));
+            setMessage("Gem deleted successfully!");
+        } catch (err) {
+            console.error("DELETE ERROR:", err.response?.data || err.message);
+            setMessage("Failed to delete gem.");
+        }
+    };
+
     if (loading) return <div className="page">Loading...</div>;
     if (error) return <div className="page error">{error}</div>;
 
@@ -131,6 +230,8 @@ const DataDisplay = () => {
         <div className="page data-display">
             <h2>Data Display</h2>
 
+            {message && <p className="response">{message}</p>}
+
             <div
                 id="map"
                 style={{
@@ -148,9 +249,28 @@ const DataDisplay = () => {
                             <h3>{group.category}</h3>
 
                             {group.items.map((gem) => (
-                                <p key={gem.id}>
-                                    • {gem.title} — {gem.description}
-                                </p>
+                                <div key={gem.id} style={{ marginBottom: "1rem" }}>
+                                    <p>
+                                        • <strong>{gem.title}</strong> — {gem.description}
+                                    </p>
+
+                                    <button
+                                        type="button"
+                                        className="btn"
+                                        onClick={() => handleEditClick(gem)}
+                                        style={{ marginRight: "10px" }}
+                                    >
+                                        Edit
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        className="btn"
+                                        onClick={() => handleDeleteGem(gem.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             ))}
                         </div>
                     ))
@@ -158,6 +278,76 @@ const DataDisplay = () => {
                     <p>No data available.</p>
                 )}
             </div>
+
+            {editingGem && (
+                <div className="page" style={{ marginTop: "2rem" }}>
+                    <h2>Edit Gem</h2>
+
+                    <form onSubmit={handleUpdateGem} className="form">
+                        <div className="form-group">
+                            <label htmlFor="editTitle">Title:</label>
+                            <input
+                                type="text"
+                                id="editTitle"
+                                name="title"
+                                value={editFormData.title}
+                                onChange={handleEditChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="editDescription">Description:</label>
+                            <textarea
+                                id="editDescription"
+                                name="description"
+                                value={editFormData.description}
+                                onChange={handleEditChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="editLatitude">Latitude:</label>
+                            <input
+                                type="number"
+                                step="any"
+                                id="editLatitude"
+                                name="latitude"
+                                value={editFormData.latitude}
+                                onChange={handleEditChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="editLongitude">Longitude:</label>
+                            <input
+                                type="number"
+                                step="any"
+                                id="editLongitude"
+                                name="longitude"
+                                value={editFormData.longitude}
+                                onChange={handleEditChange}
+                                required
+                            />
+                        </div>
+
+                        <button type="submit" className="btn">
+                            Save Changes
+                        </button>
+
+                        <button
+                            type="button"
+                            className="btn"
+                            onClick={() => setEditingGem(null)}
+                            style={{ marginLeft: "10px" }}
+                        >
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            )}
         </div>
     );
 };
